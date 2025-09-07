@@ -771,4 +771,9 @@ footer .credit span {
   font-size: 0.9rem;
   font-weight: bold;
   color: #ffcc00;
+  transition: opacity 1s ease;
+}
+
+.form-status.hide {
+  opacity: 0; /* ✅ fade target */
 }

@@ -156,7 +156,6 @@ form.addEventListener("submit", async function (e) {
   submitBtn.disabled = true;
   submitBtn.textContent = "Submitting...";
   submitBtn.classList.add("loading");
-
   status.textContent = "";
 
   const data = new FormData(form);
@@ -172,14 +171,22 @@ form.addEventListener("submit", async function (e) {
       status.textContent = "🎉 Thank you for registering! We’ll contact you soon.";
       status.className = "form-status success";
       form.reset(); // Clear the form
-      submitBtn.textContent = "Submit Registration";
+
+      setTimeout(() => {
+        status.textContent = "";
+        status.className = "form-status";
+      }, 4000); // clears after 4 seconds
     } else {
       status.textContent = "⚠️ Oops! Something went wrong. Please try again.";
       status.className = "form-status error";
-    }
+    } 
   } catch (error) {
     status.textContent = "❌ Network error. Please check your connection.";
     status.className = "form-status error";
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+    submitBtn.classList.remove("loading");
   }
 });
 
