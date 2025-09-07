@@ -120,11 +120,11 @@ const bgImages = [
   "assets/hero-imgs/hero1.jpg",
   "assets/hero-imgs/hero2.jpg",
   "assets/hero-imgs/hero3.jpg",
-  "assets/hero-imgs/hero4.jpg",
-  "assets/hero-imgs/hero5.jpg",
-  "assets/hero-imgs/hero6.jpg",
-  "assets/hero-imgs/hero7.jpg",
-  "assets/hero-imgs/hero8.jpg",
+  "assets/hero-imgs/hero4.jpeg",
+  "assets/hero-imgs/hero5.jpeg",
+  "assets/hero-imgs/hero6.jpeg",
+  "assets/hero-imgs/hero7.jpeg",
+  "assets/hero-imgs/hero8.jpeg",
 ];
 
 let currentIndex = 0;
@@ -143,10 +143,21 @@ setTimeout(() => {
 // Registration form handling
 const form = document.getElementById("reg-form");
 console.log('Form', form)
-const status = document.getElementById("formStatus");
+const status = document.getElementById("form-status");
+const submitBtn = document.querySelector("button[type=submit]");
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault(); // Stop default page reload
+
+  // Save original text
+  const originalText = submitBtn.textContent;
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+  submitBtn.classList.add("loading");
+
+  status.textContent = "";
 
   const data = new FormData(form);
 
@@ -161,6 +172,7 @@ form.addEventListener("submit", async function (e) {
       status.textContent = "🎉 Thank you for registering! We’ll contact you soon.";
       status.className = "form-status success";
       form.reset(); // Clear the form
+      submitBtn.textContent = "Submit Registration";
     } else {
       status.textContent = "⚠️ Oops! Something went wrong. Please try again.";
       status.className = "form-status error";
@@ -168,6 +180,50 @@ form.addEventListener("submit", async function (e) {
   } catch (error) {
     status.textContent = "❌ Network error. Please check your connection.";
     status.className = "form-status error";
+  }
+});
+
+// Newsletter form handling
+const newsletterForm = document.querySelector("#newsletter form");
+const newsletterBtn = newsletterForm.querySelector("button[type=submit]");
+
+// Create a status message element
+const newsletterStatus = document.createElement("p");
+newsletterStatus.className = "form-status";
+newsletterForm.appendChild(newsletterStatus);
+
+newsletterForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const originalText = newsletterBtn.textContent;
+  newsletterBtn.disabled = true;
+  newsletterBtn.textContent = "Subscribing...";
+
+  newsletterStatus.textContent = "";
+
+  const data = new FormData(newsletterForm);
+
+  try {
+    const response = await fetch(newsletterForm.action, {
+      method: newsletterForm.method,
+      body: data,
+      headers: { Accept: "application/json" }
+    });
+
+    if (response.ok) {
+      newsletterStatus.textContent = "🎉 You’re subscribed!";
+      newsletterStatus.className = "form-status success";
+      newsletterForm.reset();
+    } else {
+      newsletterStatus.textContent = "⚠️ Something went wrong. Try again.";
+      newsletterStatus.className = "form-status error";
+    }
+  } catch (error) {
+    newsletterStatus.textContent = "❌ Network error. Please try again.";
+    newsletterStatus.className = "form-status error";
+  } finally {
+    newsletterBtn.disabled = false;
+    newsletterBtn.textContent = originalText;
   }
 });
 
