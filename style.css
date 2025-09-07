@@ -596,3 +596,154 @@ footer a {
   outline: 2px solid #00FFCC;
   outline-offset: 4px;
 }
+
+/* Registration Form Styling */
+.reg-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #1A1A1A;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0,255,204,0.08);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #F5F5F5;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: #111;
+  color: #F5F5F5;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s, background 0.3s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #888;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #00FFCC;
+  box-shadow: 0 0 12px rgba(0,255,204,0.25);
+  background: #151515;
+}
+
+.reg-form .btn {
+  width: 100%;
+  padding: 0.9rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #00FFCC, #9D4EDD);
+  color: #000;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.reg-form .btn:hover {
+  background: linear-gradient(90deg, #FFB703, #FF5C5C);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(255,183,3,0.4);
+}
+
+/* Status message */
+.form-status {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  display: none;
+  padding: 0.85rem;
+  border-radius: 8px;
+}
+
+.form-status.success {
+  display: block;
+  background: rgba(0, 255, 204, 0.08);
+  color: #00FFCC;
+  border: 1px solid #00FFCC;
+}
+
+.form-status.error {
+  display: block;
+  background: rgba(255, 92, 92, 0.08);
+  color: #FF5C5C;
+  border: 1px solid #FF5C5C;
+}
+
+.form-status {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #ffcc00; /* yellowish, can change for success/error */
+}
+
+/* Responsive grid layout */
+.reg-form {
+  display: grid;
+  grid-template-columns: 1fr; /* default: single column */
+  gap: 1.2rem;
+}
+
+/* Group inputs into halves */
+.form-group.half {
+  width: 100%;
+}
+
+/* On larger screens → 2 columns */
+@media (min-width: 768px) {
+  .reg-form {
+    grid-template-columns: 1fr 1fr; /* two equal columns */
+  }
+
+  .form-group.half {
+    grid-column: span 1; /* stay in one column */
+  }
+
+  /* Make full-width fields stretch across both columns */
+  .form-group.full {
+    grid-column: span 2;
+  }
+
+  .reg-form .btn {
+    grid-column: span 2;
+  }
+
+  .form-status {
+    grid-column: span 2;
+  }
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-spinner {
+  font-size: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}

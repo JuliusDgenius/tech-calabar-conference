@@ -140,4 +140,44 @@ setTimeout(() => {
   }, 5000); // change every 5s
 }, 3000); // initial delay
 
+// Registration form handling
+const form = document.getElementById("reg-form");
+console.log('Form', form)
+const status = document.getElementById("formStatus");
+
+form.addEventListener("submit", async function (e) {
+  e.preventDefault(); // Stop default page reload
+
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { Accept: "application/json" }
+    });
+
+    if (response.ok) {
+      status.textContent = "🎉 Thank you for registering! We’ll contact you soon.";
+      status.className = "form-status success";
+      form.reset(); // Clear the form
+    } else {
+      status.textContent = "⚠️ Oops! Something went wrong. Please try again.";
+      status.className = "form-status error";
+    }
+  } catch (error) {
+    status.textContent = "❌ Network error. Please check your connection.";
+    status.className = "form-status error";
+  }
+});
+
+const reserveBtn = document.getElementById("reserve-spot");
+
+reserveBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  if (reserveBtn && form) {
+    form.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+});
 

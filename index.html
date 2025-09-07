@@ -48,7 +48,7 @@
       <p class="tagline">Innovation. Networking. Future.</p>
       <p class="date highlight">Sept 20–22, 2025 | Calabar International Conference Centre</p>
       <div class="countdown" id="countdown"></div>
-      <a href="#tickets" class="btn">Register Now</a>
+      <a href="#registration" class="btn">Register Now</a>
     </div>
   </header>
 
@@ -116,7 +116,7 @@
       <div class="avatar more">+245</div>
     </div>
 
-    <button class="btn">Reserve Your Spot</button>
+    <button id="reserve-spot" class="btn">Reserve Your Spot</button>
   </section>
 
   <!-- Tickets -->
@@ -237,10 +237,49 @@
     </iframe>
   </section>
 
+   <!-- Registration -->
+<section id="registration" class="section registration reveal">
+  <h2>Register for Tech Conference Calabar 2025</h2>
+  <p class="highlight">Secure your spot by filling in your details below.</p>
+
+  <form action="https://formspree.io/f/xblaqovw" method="POST" class="reg-form" id="reg-form">
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="ticket">Ticket Type</label>
+      <select id="ticket" name="ticket" required>
+        <option value="" disabled selected>Select your ticket</option>
+        <option value="general">General Admission</option>
+        <option value="vip">VIP</option>
+        <option value="student">Student</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Special Requests / Notes</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Any special needs or preferences?"></textarea>
+    </div>
+
+    <button type="submit" class="btn">
+      <span class="btn-text">Submit Registration</span>
+      <span class="btn-spinner" style="display:none;">⏳</span>
+    </button>
+  </form>
+  <p id="form-status" class="form-status"></p>
+</section>
+
   <!-- Newsletter -->
   <section id="newsletter" class="section reveal">
     <h2>Stay Updated</h2>
-    <form action="/subscribe" method="POST">
+    <form action="/https://formspree.io/f/xzzayrnd" method="POST">
       <input type="email" name="email" placeholder="Enter your email" required autocomplete="email" />
       <button type="submit" class="btn">Subscribe</button>
     </form>
